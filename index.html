@@ -1,642 +1,989 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Viji Venugopal Portfolio</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Viji Venugopal - Data Scientist & Researcher</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            height: 100vh;
+            background: #ffffff;
+            border-right: 1px solid #e9ecef;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            padding: 2rem 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar.mobile-hidden {
+            transform: translateX(-100%);
+        }
+        
+        .sidebar-header {
+            padding: 0 2rem 2rem;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+        }
+        
+        .profile-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            object-fit: cover;
+            border: 3px solid #f8f9fa;
+        }
+        
+        .sidebar-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-title {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-location {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+        
+        .nav-menu {
+            list-style: none;
+            padding: 2rem 0 0;
+        }
+        
+        .nav-menu li {
+            margin: 0;
+        }
+        
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: #495057;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: #f8f9fa;
+            color: #2c3e50;
+            border-left-color: #2c3e50;
+        }
+        
+        .nav-menu .icon {
+            width: 20px;
+            margin-right: 12px;
+            text-align: center;
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1001;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: 250px;
+            min-height: 100vh;
+            padding: 2rem;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .main-content.full-width {
+            margin-left: 0;
+        }
+        
+        /* Sections */
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .section-header {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #6c757d;
+            line-height: 1.6;
+        }
+        
+        /* Content Cards */
+        .content-card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid #e9ecef;
+        }
+        
+        /* Home Section */
+        .hero-content {
+            text-align: center;
+            padding: 4rem 0;
+        }
+        
+        .hero-name {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-title {
+            font-size: 1.4rem;
+            color: #495057;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-description {
+            font-size: 1.1rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.75rem 2rem;
+            border: 2px solid #2c3e50;
+            background: transparent;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .btn.primary {
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .btn.primary:hover {
+            background: #34495e;
+            border-color: #34495e;
+        }
+        
+        /* About Section */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 300;
+            color: #2c3e50;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 0.5rem;
+        }
+        
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            margin: 2rem 0;
+        }
+        
+        .timeline-item {
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #2c3e50;
+            border-radius: 50%;
+            margin-top: 0.25rem;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 12px;
+            width: 2px;
+            height: calc(100% + 1rem);
+            background: #e9ecef;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .job-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+        
+        .company {
+            color: #495057;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+        
+        .duration {
+            color: #6c757d;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+        
+        .job-description {
+            color: #495057;
+            line-height: 1.6;
+        }
+        
+        /* Publications */
+        .publication-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid #2c3e50;
+        }
+        
+        .publication-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        
+        .publication-year {
+            color: #495057;
+            font-weight: 500;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .publication-description {
+            color: #6c757d;
+            line-height: 1.5;
+        }
+        
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .skill-category {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .skill-tag {
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #2c3e50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+        
+        .contact-info strong {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .contact-info a {
+            color: #495057;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            color: #2c3e50;
+            text-decoration: underline;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            
+            .sidebar.mobile-open {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 4rem 1rem 2rem;
+            }
+            
+            .hero-name {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 200px;
+                text-align: center;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-toggle" onclick="toggleMobileMenu()">☰</button>
     
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900" rel="stylesheet">
-
-    <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-    <link rel="stylesheet" href="css/animate.css">
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8f9fa' stroke='%23ddd' stroke-width='2'/%3E%3Ctext x='50' y='55' text-anchor='middle' font-family='Arial' font-size='12' fill='%23666'%3EPhoto%3C/text%3E%3C/svg%3E" alt="Viji Venugopal" class="profile-image">
+            <div class="sidebar-name">Viji Venugopal</div>
+            <div class="sidebar-title">Data Scientist & ML Researcher</div>
+            <div class="sidebar-location">Dubai, UAE</div>
+        </div>
+        
+        <ul class="nav-menu">
+            <li><a href="#" onclick="showSection('home')" class="active">
+                <span class="icon">🏠</span>Home
+            </a></li>
+            <li><a href="#" onclick="showSection('about')">
+                <span class="icon">👤</span>About Me
+            </a></li>
+            <li><a href="#" onclick="showSection('research')">
+                <span class="icon">🔬</span>Research
+            </a></li>
+            <li><a href="#" onclick="showSection('publications')">
+                <span class="icon">📚</span>Publications
+            </a></li>
+            <li><a href="#" onclick="showSection('speaking')">
+                <span class="icon">🎤</span>Speaking
+            </a></li>
+            <li><a href="#" onclick="showSection('contact')">
+                <span class="icon">📧</span>Contact
+            </a></li>
+        </ul>
+    </div>
     
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/magnific-popup.css">
-
-    <link rel="stylesheet" href="css/aos.css">
-
-    <link rel="stylesheet" href="css/ionicons.min.css">
-    
-    <link rel="stylesheet" href="css/flaticon.css">
-    <link rel="stylesheet" href="css/icomoon.css">
-    <link rel="stylesheet" href="css/style.css">
-
-
-
-<style>
-
-/*======================================
-//--//-->   ABOUT
-======================================*/
-
-.about-mf .box-shadow-full {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-}
-
-.about-mf .about-img {
-  margin-bottom: 2rem;
-}
-
-.about-mf .about-img img {
-  margin-left: 10px;
-}
-
-
-.skill-mf .progress {
-  /* background-color: #cde1f8; */
-  margin: .5rem 0 1.2rem 0;
-  border-radius: 0;
-  height: .7rem;
-}
-
-.skill-mf .progress .progress-bar {
-  height: .7rem;
-  background-color: #ffbd39;
-}
-
-
-/* Animation styles */
-#typing-animation {
-  position: relative;
-  font-size: 30px;
-  font-weight: bold;
-  color: rgb(255, 255, 255);
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 3s steps(20, end) infinite;
-}
-
-#typing-animation:before {
-  content: "";
-  /* position: absolute; */
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100%;
-  background-color: #ccc;
-  animation: typing-cursor 0.5s ease-in-out infinite;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 100%;
-  }
-}
-
-@keyframes typing-cursor {
-  from {
-    width: 5px;
-  }
-  to {
-    width: 0;
-  }
-}
-
-
-/* project image zoom effect */
-
-.zoom-effect {
-  overflow: hidden;
-  transition: transform 0.3s ease-out;
-}
-
-.zoom-effect:hover {
-  transform: scale(1.1);
-}
-
-
-</style>
-
-
-  </head>
-  <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-	  
-	  
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
-	    <div class="container">
-	      <a class="navbar-brand" href="index.html">Viji  Venugopal</a>
-	      <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav nav ml-auto">
-	          <li class="nav-item"><a href="#home-section" class="nav-link"><span>Home</span></a></li>
-	          <li class="nav-item"><a href="#about-section" class="nav-link"><span>About</span></a></li>
-	          <li class="nav-item"><a href="#resume-section" class="nav-link"><span>Resume</span></a></li>
-	          <li class="nav-item"><a href="#project-section" class="nav-link"><span>Projects</span></a></li>
-	          <li class="nav-item"><a href="#contact-section" class="nav-link"><span>Contact</span></a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-	  <section id="home-section" class="hero">
-		  <div class="home-slider  owl-carousel">
-	       <div class="slider-item ">
-	      	<div class="overlay"></div>
-	         <div class="container">
-	          <div class="row d-md-flex no-gutters slider-text align-items-end justify-content-end" data-scrollax-parent="true">
-	          	<div class="one-third js-fullheight order-md-last img" style="background-image:url(images);"> 
-	          	 <div class="overlay"></div>
-	          	</div>
-		          <div class="one-forth d-flex  align-items-center ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-		          	<div class="text">
-		          		<span class="subheading">Hello!</span>
-			            <h1 class="mb-4 mt-3">I'm <span>Viji Venugopal</span></h1>
-
-						<!-- Element to contain animated typing -->
-						<span id="typing-animation"></span>
-
-						<script>
-
-						// Initialize the typing animation
-						const typingAnimationElement = document.getElementById('typing-animation');
-
-						// Create an array of typing text
-						const typingTexts = [
-						'Researcher  ',
-						'Data Analyst  ',
-						'Machine Learning Engineer  ',
-						];
-
-						// Create a function to display the typing animation for a given text
-						function playTypingAnimation(text) {
-						// Loop through each character and add it to the element
-						for (let i = 0; i < text.length; i++) {
-							setTimeout(() => {
-							typingAnimationElement.textContent += text[i];
-							}, i * 200); // Increase the delay to slow down the typing animation
-						}
-
-						// Once the animation is complete, reset the text and start over
-						setTimeout(() => {
-							typingAnimationElement.textContent = '';
-							playTypingAnimation(typingTexts[(typingTexts.indexOf(text) + 1) % typingTexts.length]);
-						}, text.length * 200);
-						}
-
-						// Start the typing animation loop
-						playTypingAnimation(typingTexts[0]);
-
-						</script>
-
-						<br>
-						<br>
-			            <h2>Data Analyst/Machine Learning Engineer</h2>
-						<!-- <h2 class="d-flex" style="margin-bottom: 0">With over 5 years of experience</h2> -->
-						<!-- <br> -->
-			            <p><a href="https://www.linkedin.com/in/vijivenugopal/" class="btn btn-primary py-3 px-4">LinkedIn</a> 
-							<a href="https://github.com/LEARNNGGIRL009" class="btn btn-white btn-outline-white py-3 px-4">My work</a></p>
-		            </div>
-		          </div>
-	        	</div>
-	        </div>
-	      </div>
-		</div>
-    </section>
-
-
-
-    <section class="ftco-about img ftco-section ftco-no-pb" id="about-section">
-    	<div class="container">
-			<div class="row">
-				<div class="row d-flex align-items-stretch">
-				<!-- <div class="row d-flex"> -->
-
-					
-					<div class="col-md-6 col-lg-5 d-flex">
-						<div class="img-about img d-flex align-items-stretch">
-							<div class="overlay">
-								<div class="row">
-									<div class="col-sm-6 col-md-5">
-									  <div class="about-img">
-										<img src="images/about-me.png" class="img-fluid rounded b-shadow-a" alt="">
-									  </div>
-									</div>
-									<!-- Details next to profile image -->
-									<div class="col-sm-6 col-md-7">
-									  <div class="about-info">
-										<p><span class="title-s">Name: </span> <span>Viji Venugopal</span></p>
-										<p><span class="title-s">Job Role: </span> <span>Freelance Data Analyst</span></p>
-										<p><span class="title-s">Experience: </span> <span>4 year</span></p>
-										<p><span class="title-s">Address: </span> <span>Dubai UAE</span></p>
-									  </div>
-									</div>
-								  </div>
-
-								<div class="skill-mf">
-									<p class="title-s">Skills</p>
-									<span>SQL</span> <span class="pull-right">95%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 95%;" aria-valuenow="95" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>PYTHON</span> <span class="pull-right">95%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Data Visualization</span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Statistical Analysis</span> <span class="pull-right">85%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-									
-									<span>Machine Learning</span> <span class="pull-right">90%</span>
-									<div class="progress">
-										<div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0"
-											aria-valuemax="100"></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-6 col-lg-7 pl-lg-5 pb-5">
-						<div class="row justify-content-start pb-3">
-							<div class="col-md-12 heading-section ftco-animate">
-								
-								<h1 class="big">About</h1>
-								<h2 class="mb-4">About Me</h2>
-								
-								<p>Pursuing a Ph.D. in Machine Learning and Data Analysis, I am a professional Python educator. I'm excited to move on to a machine-learning engineer or data analyst position to employ my advanced machine-learning skills and rich programming experience to stimulate innovation and data-driven decision-making. </p>
-								<ul class="about-info mt-4 px-md-0 px-2">
-									<li class="d-flex"><span>Profile:</span> <span>Data Science &amp; Analytics</span></li>
-									<li class="d-flex"><span>Domain:</span> <span>Business Analytics, Healthcare, Fraud Detection, Finance &amp; Big Data </span></li>
-									<li class="d-flex"><span>Education:</span> <span>PhD Machine Learning and Analytics-Pursuing</span></li>
-									<li class="d-flex"><span>Language:</span> <span>English, Hindi, Malayalam, Gujarati</span></li>
-									<li class="d-flex"><span>BI Tools:</span> <span>Microsoft Power BI, Python &amp; Tableau</span></li>
-									<li class="d-flex"><span>Other Skills:</span> <span>Cloud, NLP, Gen AI, Git, AWS, Google Analytics &amp; Chatbots</span></li>
-									<li class="d-flex"><span>Interest:</span> <span>Traveling, Teaching, Dancing</span></li>
-									
-								</ul>
-							</div>
-						</div>
-
-
-						<div class="counter-wrap ftco-animate d-flex mt-md-3">
-							<div class="text">
-								<p class="mb-4">
-									<span class="number" data-number="30">0</span> <span>+</span>
-									<span>&nbsp; Projects completed</span>
-								</p>
-								<p><a href="https://www.linkedin.com/in/vijivenugopal/" class="btn btn-primary py-3 px-3">LinkedIn</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-    </section>
-
-
-
-	
-    <section class="ftco-section ftco-no-pb" id="resume-section">
-    	<div class="container">
-    		<div class="row justify-content-center pb-5">
-          <div class="col-md-10 heading-section text-center ftco-animate">
-          	<h1 class="big big-2">Resume</h1>
-            <h2 class="mb-4">Resume</h2>
-            <p>Seasoned data analyst with over 30 practical Proof of Concept projects, that include the newest innovations in Intelligent Chatbots and Generative AI technologies. </p>
-          </div>
-        </div>
-	
-		<div class="row">
-			<h1 class="big-4">Certification</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-
-		<div class="row">
-				<div class="col-md-6">
-					<div class="resume-wrap ftco-animate">
-						<!--<span class="date">2021-Present</span> -->
-						<h2>Section 1</h2>
-						<span class="position">Cloud & Visualization</span>
-						<p class="mt-4">
-							<ul>
-								<li>AWS Designing and deploying an Amazon Elastic File System Solution - Mar 2022</li>
-								<li>AWS Data Analytics Plan - Jun 2022</li>
-								<li>Microsoft Power Bi - Aug 2022</li>
-							</ul>
-						</p>
-					</div>
-
-				</div>
-
-				<div class="col-md-6">
-					<div class="resume-wrap ftco-animate">
-						<!--<span class="date">2018-2021</span> -->
-						<h2>Secion 2</h2>
-						<span class="position">Data Analysis & Programming</span>
-						<p class="mt-4">
-							<ul>
-								<li>Deep Learning, EICT, IIT Roorkee - Oct 2020</li>
-								<li>Machine Learning Specialization, EICT, IIT Roorkee - Oct 2020</li>
-								<li>Python for Machine Learning, EICT, IIT Roorkee - Oct 2020</li>
-							</ul>
-						</p>
-					</div>
-
-				</div>
-			</div>
-
-		<br>
-		<br>
-		
-		<div class="row">
-			<h1 class="big-4">Education</h1>
-			<div class="underline"></div>
-		</div>
-		<br>
-		
-			<div class="row">
-    			<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    					<!--<span class="date">2014-2018</span>-->
-    					<h2>Ph.D. Machine Learning and Data Analysis</h2>
-    					<span class="position">R K University</span>
-    					<p class="mt-4">Grade: Pursuing.</p>
-						<p class="mt-4">
-							<ul>
-								<li>Presented a paper on ‘Using AI for Classifying plant root disease’ at the ‘Digital Transformation & Sustainability of Business Conference’ Mar 2024</li>
-								<li>Key Speaker at the International Conference on AI and Machine Learning, Dubai Oct 2022</li>
-							</ul>
-						</p>
-    				</div>
-    			</div>
-
-    			<div class="col-md-6">
-    				<div class="resume-wrap ftco-animate">
-    				<!--	<span class="date">2012-2013</span>-->
-    					<h2>Master of Computer Applications</h2>
-    					<span class="position">Indira Gandhi University</span>
-    					<p class="mt-4">Grade: First class distinction.</p>
-						<p class="mt-4">iQuanti is a data-driven digital marketing analytics and solutions company, helps top 100 global brands. 
-							<ul>
-								<li>Major Subjects: Python Programming , Database Analysis , System Design</li>
-								<li>Six months Data Analysis internship at Union Bank of India</li>
-							</ul>
-						</p>
-    				</div>
-				</div>
-    		</div>
-
-    		<div class="row justify-content-center mt-5">
-    			<div class="col-md-6 text-center ftco-animate">
-    				<p><a href="https://drive.google.com/file/d/1IJ3WdZ-SPlkLLlbon-GWMOBOOtFQ7JSn/view?usp=sharing" class="btn btn-primary py-4 px-5">Download CV</a></p>
-    			</div>
-    		</div>
-    	</div>
-    </section>
-
-   
-
-    <section class="ftco-section" id="project-section">
-      <div class="container">
-        <div class="row justify-content-center mb-5 pb-5">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Projects</h1>
-            <h2 class="mb-4">Projects</h2>
-            <p>Below are the sample Data Analytics projects on SQL, Power BI , Python & Machine Learning , Generative AI.</p>
-          </div>
-        </div>
-        <div class="row d-flex">
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://github.com/LEARNNGGIRL009/Airport-Data-Analysis-Python-SQL/blob/main/Airlines_Analysis.ipynb" class="block-20 zoom-effect" style="background-image: url('images/proj_1.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/LEARNNGGIRL009/Airport-Data-Analysis-Python-SQL/blob/main/Airlines_Analysis.ipynb">Airlines Data Analysis using Python and SQL</a></h3>
-                <p>Analyzed Airlines data using Python, advanced SQL queires, Seaborn Visualization to identify gaps and increase the business growth.</p>
-              </div>
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="content-card">
+                <div class="hero-content">
+                    <h1 class="hero-name">Viji Venugopal</h1>
+                    <p class="hero-title">Data Scientist & Machine Learning Researcher</p>
+                    <p class="hero-description">
+                        Experienced Data Analyst specializing in automation, ETL pipelines, and AI solutions across education and retail sectors. Currently pursuing PhD in Machine Learning & Data Analysis while driving business improvements through data-driven solutions.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#" class="btn primary" onclick="showSection('contact')">Get In Touch</a>
+                        <a href="#" class="btn" onclick="showSection('research')">View Research</a>
+                        <a href="https://learnnggirl009.github.io/" class="btn" target="_blank">Portfolio</a>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry justify-content-end">
-              <a href="https://github.com/LEARNNGGIRL009/Medical-Chatbot-LLAMA2-Pinecone" class="block-20 zoom-effect" style="background-image: url('images/proj_2.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
+        </section>
 
-                <h3 class="heading"><a href="https://github.com/LEARNNGGIRL009/Medical-Chatbot-LLAMA2-Pinecone">Medical Chatbot using LLAMA2-Pinecone</a></h3>
-                <p>Provide with personalized treatment plans using AI-powered applications that analyze genetic, clinical, and lifestyle data from a medical encyclopedia.</p>
-              </div>
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <h1 class="section-title">About Me</h1>
+                <p class="section-subtitle">Professional journey and expertise in data science and machine learning</p>
             </div>
-          </div>
-          <div class="col-md-4 d-flex ftco-animate">
-          	<div class="blog-entry">
-              <a href="https://github.com/LEARNNGGIRL009/Sales-Analysis-using-Power-BI/blob/main/2022%20Wholesale%20Sale.pdf" class="block-20 zoom-effect" style="background-image: url('images/proj_3.jpg');">
-              </a>
-              <div class="text mt-3 float-right d-block">
-
-                <h3 class="heading"><a href="https://github.com/LEARNNGGIRL009/Sales-Analysis-using-Power-BI/blob/main/2022%20Wholesale%20Sale.pdf">Power BI Sales Dashboard Project</a></h3>
-                <p>Designed a Power BI dashboard to track and analyze the sales data acorss India.Graphical and customizable interfaces to evaluate sales data</p>
-              </div>
+            
+            <div class="content-card">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Retail Locations</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">Students Impacted</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">40%</div>
+                        <div class="stat-label">Efficiency Gains</div>
+                    </div>
+                </div>
+                
+                <p style="font-size: 1.1rem; line-height: 1.8; margin: 2rem 0;">
+                    With over a decade of experience in data analytics and machine learning, I specialize in transforming complex data into actionable business insights. My expertise spans across retail analytics, educational technology, and research applications, with a focus on automation and AI-driven solutions.
+                </p>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="job-title">Data Analyst</div>
+                        <div class="company">VIP Industries Limited, Dubai</div>
+                        <div class="duration">July 2023 – Present</div>
+                        <div class="job-description">
+                            Analyzing sales and inventory data across 100+ retail locations, implementing automated reporting solutions that reduced manual reporting time by 40% and improved inventory turnover by 15%.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="job-title">Data Analyst & Python Tutor</div>
+                        <div class="company">GEMS Education, Dubai</div>
+                        <div class="duration">2021 – 2023</div>
+                        <div class="job-description">
+                            Created Power BI scorecards and dashboards for 5000+ students, improving academic intervention response time by 35% through early identification of learning gaps.
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="job-title">Data Analyst & Python Tutor</div>
+                        <div class="company">The Indian High Group of School, Dubai</div>
+                        <div class="duration">2014 – 2021</div>
+                        <div class="job-description">
+                            Engineered AI-based face detection attendance system with 98% accuracy for 500+ students and led digital transformation initiatives.
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-	<br>
-		<!-- added justify-content-center to center align the last two projects -->
-		<div class="row d-flex justify-content-center">  
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-				<a href="https://github.com/LEARNNGGIRL009/Credit-Card-Analysis-using-Power-BI/blob/main/Credit%20Card%20Report.pdf" class="block-20 zoom-effect" style="background-image: url('images/proj_4.jpg');">
-				</a>
-				<div class="text mt-3 float-right d-block">
-  
-				  <h3 class="heading"><a href="https://github.com/LEARNNGGIRL009/Credit-Card-Analysis-using-Power-BI/blob/main/Credit%20Card%20Report.pdf">Credit Card Analysis</a></h3>
-				  <p>A comprehensive weekly dashboard for credit card operations, providing real-time insights and key performance metrics for stakeholders to monitor and analyze effectively.</p>
-				</div>
-			  </div>
-			</div>
-			<div class="col-md-4 d-flex ftco-animate">
-				<div class="blog-entry justify-content-end">
-				<a href="https://github.com/LEARNNGGIRL009/SMS-Spam-Classifier/blob/main/main.py" class="block-20 zoom-effect" style="background-image: url('images/proj_5.jpg');">
-				</a>
-				<div class="text mt-3 float-right d-block">
-  
-				  <h3 class="heading"><a href="https://github.com/LEARNNGGIRL009/SMS-Spam-Classifier/blob/main/main.py">SMS SPAM message Classifier</a></h3>
-				  <p>Build a robust spam detection model that can accurately classify emails as spam or legitimate based on their content.</p>
-				</div>
-			  </div>
-			</div>
-		 </div>
-	  </div>
-    </section>
-
-	<section class="ftco-section ftco-no-pt ftco-no-pb ftco-counter img" id="section-counter">
-      <div class="container">
-		<div class="row d-md-flex align-items-center">
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="5">0</strong>
-                <span>Achievements</span>
-              </div>
+            
+            <div class="content-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">Technical Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Machine Learning</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">TensorFlow</span>
+                            <span class="skill-tag">Scikit-learn</span>
+                            <span class="skill-tag">Deep Learning</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Cloud & Big Data</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">AWS Glue</span>
+                            <span class="skill-tag">EC2</span>
+                            <span class="skill-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Analytics & Visualization</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Power BI</span>
+                            <span class="skill-tag">Tableau</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">Pandas</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>AI & NLP</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Generative AI</span>
+                            <span class="skill-tag">RAG</span>
+                            <span class="skill-tag">Langchain</span>
+                            <span class="skill-tag">Hugging Face</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="30">0</strong>
-                <span>Projects</span>
-              </div>
+        </section>
+
+        <!-- Research Section -->
+        <section id="research" class="section">
+            <div class="section-header">
+                <h1 class="section-title">Research & Projects</h1>
+                <p class="section-subtitle">Current research focus and notable project implementations</p>
             </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="3">0</strong>
-                <span>Conference Speaker</span>
-              </div>
+            
+            <div class="content-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">Current Research</h3>
+                <div class="publication-item">
+                    <div class="publication-title">PhD Research: Machine Learning & Data Analysis</div>
+                    <div class="publication-year">RK University, India - In Progress</div>
+                    <div class="publication-description">
+                        Focusing on advanced machine learning techniques for practical applications in hydroponics, plant disease classification, and agricultural optimization.
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="col-md d-flex justify-content-center counter-wrap ftco-animate">
-            <div class="block-18">
-              <div class="text">
-                <strong class="number" data-number="2">0</strong>
-                <span>Published Papers</span>
-              </div>
+
+            <div class="content-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">Featured Projects</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="job-title">Medical Chatbot System</div>
+                        <div class="company">LLAMA2, NLP, AWS Langchain, Pinecone, Hugging Face</div>
+                        <div class="job-description">
+                            Developed a comprehensive healthcare query system with natural language processing capabilities and KPI monitoring for medical assistance applications.
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="job-title">Dubai Air Quality Monitoring</div>
+                        <div class="company">CNN, InceptionV3, TensorFlow, Keras, Computer Vision</div>
+                        <div class="job-description">
+                            Created a real-time pollution detection system using advanced image enhancement algorithms for environmental monitoring and analysis.
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="job-title">AI-Based Attendance System</div>
+                        <div class="company">Face Detection & Recognition Technology</div>
+                        <div class="job-description">
+                            Deployed contactless verification system during COVID-19 for 500+ board exam students achieving 98% accuracy rate.
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="job-title">Airlines Analytics Platform</div>
+                        <div class="company">Python, SQL, Machine Learning</div>
+                        <div class="job-description">
+                            Achieved 20% flight occupancy optimization and developed predictive fare models for enhanced revenue management.
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-	
-	  <div class="ftco-section ftco-hireme img margin-top" style="background-image: url(images/bg_1.jpg)">
-			<!-- <div class="container"> -->
-				<div class="row justify-content-center">
-					<div class="col-md-7 ftco-animate text-center">
-						<h2>More projects on<span> Github  </span> </h2>
-						<div class="heading"> <h4> I love to solve business problems &amp; uncover hidden data stories </h4>
-						<br>
-						<p><a href="https://github.com/LEARNNGGIRL009" class="btn btn-primary py-3 px-5">GitHub</a></p>
-						</div>
-					</div>
-				</div>
-			<!-- </div> -->
-		</div>
-	</section>
+        </section>
 
+        <!-- Publications Section -->
+        <section id="publications" class="section">
+            <div class="section-header">
+                <h1 class="section-title">Publications</h1>
+                <p class="section-subtitle">Research publications and academic contributions</p>
+            </div>
+            
+            <div class="content-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">Recent Publications</h3>
+                
+                <div class="publication-item">
+                    <div class="publication-title">Handling Sensor Faults in Hydroponics: A Deep Learning Imputation Technique for Accurate Tomato Yield Prediction</div>
+                    <div class="publication-year">2025</div>
+                    <div class="publication-description">
+                        Advanced deep learning approach for agricultural sensor fault management and crop yield optimization using imputation techniques.
+                    </div>
+                </div>
 
+                <div class="publication-item">
+                    <div class="publication-title">AI for Classifying Plant Root Disease</div>
+                    <div class="publication-year">2024 - Digital Transformation & Sustainability Conference</div>
+                    <div class="publication-description">
+                        Machine learning classification system for early detection and management of plant diseases in agricultural settings.
+                    </div>
+                </div>
 
-    <section class="ftco-section contact-section ftco-no-pb" id="contact-section">
-      <div class="container">
-      	<div class="row justify-content-center mb-5 pb-3">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-            <h1 class="big big-2">Contact</h1>
-            <h2 class="mb-4">Contact Me</h2>
-            <p>Below are the details to reach out to me!</p>
-          </div>
-        </div>
+                <div class="publication-item">
+                    <div class="publication-title">Exploratory Data Analyses</div>
+                    <div class="publication-year">2022 - International Conference on Science, Engineering and Technology</div>
+                    <div class="publication-description">
+                        Comprehensive methodologies for data exploration and pattern recognition in large-scale datasets.
+                    </div>
+                </div>
+            </div>
 
-        <div class="row d-flex contact-info mb-5">
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-map-signs"></span>
-          		</div>
-          		<h3 class="mb-4">Address</h3>
-	            <p>Dubai, UAE</p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-phone2"></span>
-          		</div>
-          		<h3 class="mb-4">Contact Number</h3>
-	            <p><a href="Click me">+971 582978075</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-paper-plane"></span>
-          		</div>
-          		<h3 class="mb-4">Email Address</h3>
-	            <p><a href="mailto:info@yoursite.com">viji.venugopal.k@gmail.com</a></p>
-	          </div>
-          </div>
-          <div class="col-md-6 col-lg-3 d-flex ftco-animate">
-          	<div class="align-self-stretch box p-4 text-center">
-          		<div class="icon d-flex align-items-center justify-content-center">
-          			<span class="icon-globe"></span>
-          		</div>
-          		<h3 class="mb-4">Download Resume</h3>
-	            <p><a href="https://drive.google.com/file/d/1IJ3WdZ-SPlkLLlbon-GWMOBOOtFQ7JSn/view?usp=sharing">resume link</a></p>
-	          </div>
-          </div>
+            <div class="content-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">Research Impact</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Published Papers</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">20x</div>
+                        <div class="stat-label">Pollution Reduction</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">90%</div>
+                        <div class="stat-label">Data Conversion Rate</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">70%</div>
+                        <div class="stat-label">Paper Usage Reduction</div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="https://orcid.org/0000-0002-8004-7583" class="btn primary" target="_blank">ORCiD Profile</a>
+                    <a href="https://github.com/LEARNNGGIRL009" class="btn" target="_blank">GitHub Repository</a>
+                </div>
+            </div>
+        </section>
 
-		  <div class="container">
-			<br>
-			<br>
-			
-			<div class="row justify-content-center">
-				<div class="col-md-7 ftco-animate text-center">
-					<!--<h2>Have a<span> Question?  </span> <a href="https://forms.gle/uLaTShUKXraAvHJ77" class="btn btn-primary py-3 px-5">Click Here</a> </h2> -->
-				</div>
-			</div>
-				<br>
-					<ul class="ftco-footer-social list-unstyled d-flex justify-content-center align-items-center mb-0">
-					  <li class="ftco-animate normal-txt">Find me on  </li>
-					  <li class="ftco-animate"><a href="https://www.linkedin.com/in/vijivenugopal/"><span class="icon-linkedin"></span></a></li>  
-				      <li class="ftco-animate"><a href="https://github.com/LEARNNGGIRL009"><span class="icon-github"></span></a></li>
-					</ul>
-				<br>
-		   </div>
-   </div>
- </section>
+        <!-- Speaking Section -->
+        <section id="speaking" class="section">
+            <div class="section-header">
+                <h1 class="section-title">Speaking & Community</h1>
+                <p class="section-subtitle">Conference presentations, teaching, and professional development</p>
+            </div>
+            
+            <div class="content-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">Conference Speaking</h3>
+                
+                <div class="timeline-item">
+                    <div class="job-title">Key Speaker - International Conference on AI and Machine Learning</div>
+                    <div class="company">Dubai 2022</div>
+                    <div class="job-description">
+                        Presented cutting-edge research on AI applications in business transformation and sustainable technology solutions to international audience.
+                    </div>
+                </div>
+            </div>
 
+            <div class="content-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">Teaching & Mentoring</h3>
+                
+                <div class="timeline-item">
+                    <div class="job-title">Python & Data Science Instructor</div>
+                    <div class="company">GEMS Education & The Indian High Group of School</div>
+                    <div class="job-description">
+                        Mentored students in Python programming, data analysis, and SQL. Developed hands-on projects and curricula for technical skill development at British college level.
+                    </div>
+                </div>
+            </div>
 
- 
-	
-    <footer class="ftco-footer ftco-section">
-		<div class="container">
-		  <div class="row">
-			<div class="col-md-12 text-center">
-  
-			  <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-	<!--Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart color-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> -->
-	<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-			</div>
-		  </div>
-		</div>
-	  </footer>
+            <div class="content-card">
+                <h3 style="color: #2c3e50; margin-bottom: 1.5rem;">Professional Certifications</h3>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>AWS Cloud</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Data Analytics Plan</span>
+                            <span class="skill-tag">EFS Solutions</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Machine Learning</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Deep Learning - IIT</span>
+                            <span class="skill-tag">ML Specialization</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Data Visualization</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Microsoft Power BI</span>
+                            <span class="skill-tag">Advanced Analytics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-header">
+                <h1 class="section-title">Contact</h1>
+                <p class="section-subtitle">Open for postdoctoral opportunities, research collaborations, and consulting projects</p>
+            </div>
+            
+            <div class="content-card">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-info">
+                            <strong>Email</strong><br>
+                            <a href="mailto:viji.venugopal.k@gmail.com">viji.venugopal.k@gmail.com</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-info">
+                            <strong>Phone</strong><br>
+                            <a href="tel:+971582978075">+971 582978075</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-info">
+                            <strong>LinkedIn</strong><br>
+                            <a href="https://www.linkedin.com/in/vijivenugopal" target="_blank">linkedin.com/in/vijivenugopal</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🔬</div>
+                        <div class="contact-info">
+                            <strong>Research Profile</strong><br>
+                            <a href="https://orcid.org/0000-0002-8004-7583" target="_blank">ORCiD Profile</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div class="contact-info">
+                            <strong>Portfolio</strong><br>
+                            <a href="https://learnnggirl009.github.io/" target="_blank">View My Work</a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-info">
+                            <strong>Location</strong><br>
+                            Dubai, United Arab Emirates
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+    <script>
+        let currentSection = 'home';
 
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav link
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the clicked nav item
+            const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            currentSection = sectionId;
+            
+            // Close mobile menu if open
+            if (window.innerWidth <= 768) {
+                closeMobileMenu();
+            }
+        }
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-migrate-3.0.1.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/jquery.easing.1.3.js"></script>
-  <script src="js/jquery.waypoints.min.js"></script>
-  <script src="js/jquery.stellar.min.js"></script>
-  <script src="js/owl.carousel.min.js"></script>
-  <script src="js/jquery.magnific-popup.min.js"></script>
-  <script src="js/aos.js"></script>
-  <script src="js/jquery.animateNumber.min.js"></script>
-  <script src="js/scrollax.min.js"></script>
-  
-  <script src="js/main.js"></script>
-    
-  </body>
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            if (sidebar.classList.contains('mobile-open')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        }
+
+        function openMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            sidebar.classList.add('mobile-open');
+            sidebar.classList.remove('mobile-hidden');
+        }
+
+        function closeMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            sidebar.classList.remove('mobile-open');
+            sidebar.classList.add('mobile-hidden');
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('mobile-open', 'mobile-hidden');
+                mainContent.classList.remove('full-width');
+            } else {
+                if (!sidebar.classList.contains('mobile-open')) {
+                    sidebar.classList.add('mobile-hidden');
+                }
+                mainContent.classList.add('full-width');
+            }
+        });
+
+        // Initialize mobile layout on load
+        window.addEventListener('load', function() {
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.add('mobile-hidden');
+                document.getElementById('mainContent').classList.add('full-width');
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const toggle = document.querySelector('.mobile-toggle');
+            
+            if (window.innerWidth <= 768 && 
+                sidebar.classList.contains('mobile-open') && 
+                !sidebar.contains(event.target) && 
+                !toggle.contains(event.target)) {
+                closeMobileMenu();
+            }
+        });
+    </script>
+</body>
 </html>
