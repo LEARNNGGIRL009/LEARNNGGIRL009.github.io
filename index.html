@@ -435,7 +435,50 @@
             text-decoration: underline;
         }
         
-        /* Mobile Responsive */
+        /* Category Navigation Buttons */
+        .category-nav {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .category-btn {
+            background: white;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .category-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-color: #2c3e50;
+        }
+        
+        .category-btn.active {
+            background: #f8f9fa;
+            border-color: #2c3e50;
+        }
+        
+        .category-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        
+        .category-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin: 0;
+        }
         @media (max-width: 768px) {
             .mobile-toggle {
                 display: block;
@@ -495,7 +538,7 @@
     <!-- Sidebar Navigation -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <img src= >
+            <img src="Viji_Photo.jpeg" alt="Viji Venugopal" class="profile-image">
             <div class="sidebar-name">Viji Venugopal</div>
             <div class="sidebar-title">Data Scientist & ML Researcher</div>
             <div class="sidebar-location">Dubai, UAE</div>
@@ -552,10 +595,30 @@
             <div class="section-header">
                 <h1 class="section-title">About Me</h1>
                 <p class="section-subtitle">Professional journey across research, education, data science, and content creation</p>
+                
+                <!-- Category Navigation Buttons -->
+                <div class="category-nav">
+                    <div class="category-btn" onclick="scrollToSection('research-section')">
+                        <span class="category-icon">🔬</span>
+                        <p class="category-title">Research</p>
+                    </div>
+                    <div class="category-btn" onclick="scrollToSection('datascientist-section')">
+                        <span class="category-icon">📊</span>
+                        <p class="category-title">Data Scientist</p>
+                    </div>
+                    <div class="category-btn" onclick="scrollToSection('educator-section')">
+                        <span class="category-icon">👩‍🏫</span>
+                        <p class="category-title">Python Educator</p>
+                    </div>
+                    <div class="category-btn" onclick="scrollToSection('creator-section')">
+                        <span class="category-icon">🎬</span>
+                        <p class="category-title">Content Creator</p>
+                    </div>
+                </div>
             </div>
             
             <!-- Research Section -->
-            <div class="content-card">
+            <div class="content-card" id="research-section">
                 <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.4rem;">🔬 Research</h3>
                 <div class="timeline">
                     <div class="timeline-item">
@@ -579,7 +642,7 @@
             </div>
             
             <!-- Data Scientist Section -->
-            <div class="content-card">
+            <div class="content-card" id="datascientist-section">
                 <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.4rem;">📊 Data Scientist</h3>
                 <div class="timeline">
                     <div class="timeline-item">
@@ -594,7 +657,7 @@
             </div>
             
             <!-- Python Educator Section -->
-            <div class="content-card">
+            <div class="content-card" id="educator-section">
                 <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.4rem;">👩‍🏫 Python Educator</h3>
                 <div class="timeline">
                     <div class="timeline-item">
@@ -618,7 +681,7 @@
             </div>
             
             <!-- Content Creator Section -->
-            <div class="content-card">
+            <div class="content-card" id="creator-section">
                 <h3 style="color: #2c3e50; margin-bottom: 1.5rem; font-size: 1.4rem;">🎬 Content Creator</h3>
                 <div class="timeline-item">
                     <div class="job-title">HerAI Lab - Founder & Content Creator</div>
@@ -728,7 +791,7 @@
 
                 <div class="publication-item">
                     <div class="publication-title">Missing value imputation techniques used in deep learning algorithms: A review</div>
-                    <div class="publication-year">AIP Conference</div>
+                    <div class="publication-year">Review Paper</div>
                     <div class="publication-description">
                         Comprehensive review of state-of-art practices for handling missing data in Machine Learning and Deep Learning algorithms. Discusses types of missing value imputation techniques, their positive and negative impacts, and future research possibilities since 60% of an algorithm's efficiency depends on data quality.
                     </div>
@@ -744,19 +807,15 @@
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">20x</div>
-                        <div class="stat-label">Sustainable technologies</div>
+                        <div class="stat-label">Pollution Reduction</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-number">30%</div>
-                        <div class="stat-label">Reducing waste and carbon footprint</div>
+                        <div class="stat-number">90%</div>
+                        <div class="stat-label">Data Conversion Rate</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">70%</div>
-                        <div class="stat-label">Improving infrastructure or manufacturing processes</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">40%</div>
-                        <div class="stat-label">Contributing to open data repositories</div>
+                        <div class="stat-label">Paper Usage Reduction</div>
                     </div>
                 </div>
                 
@@ -1002,6 +1061,22 @@
                 mainContent.classList.add('full-width');
             }
         });
+
+        // Smooth scroll to specific sections within About page
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active button
+                const buttons = document.querySelectorAll('.category-btn');
+                buttons.forEach(btn => btn.classList.remove('active'));
+                event.target.closest('.category-btn').classList.add('active');
+            }
+        }
 
         // Initialize mobile layout on load
         window.addEventListener('load', function() {
